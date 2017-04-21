@@ -26,6 +26,7 @@ public class Memory implements Serializable{
 		this.wordInfoList.add(wordInfo);
 	}
 
+
 	public WordInfo getWordInfoAt(int index){
 		return this.wordInfoList.get(index);
 	}

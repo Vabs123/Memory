@@ -1,30 +1,24 @@
+package helper;
+
+import datasaver.SaveData;
+import wordstructure.Memory;
 import java.io.File;
 import java.util.ArrayList;
 
 public class MemoryController {
-	SaveData sd;
+	private SaveData sd;
 	private ArrayList<Memory> memoryList;
 
 	public MemoryController(){
-		try{
-			this.sd = new SaveData("memory.txt");
-			this.memoryList = (ArrayList<Memory>) sd.getData();
-		}
-		catch(Exception e){
-			System.out.println(e);
-		}
+		this.sd = new SaveData("/tmp/data/memory.txt");
+		this.memoryList = (ArrayList<Memory>) sd.getData();
 		if(this.memoryList == null)
 			this.memoryList = new ArrayList<>();
 	}
 
 	public void saveMemory(Memory memory){
 		this.memoryList.add(memory);
-		try{
-			this.sd.saveData(memoryList);
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
+		this.sd.saveData(memoryList);
 	}
 
 	public ArrayList<Memory> getMemories(){
@@ -40,5 +34,8 @@ public class MemoryController {
 	public String toString(){
 		return this.memoryList.toString();
 	}
-
+	public static void main(String[] args) {
+		MemoryController memoryController = new MemoryController();
+		System.out.println(memoryController.clearMemory());
+	}
 }

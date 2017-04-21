@@ -1,3 +1,5 @@
+package wordstructure;
+
 import java.io.Serializable;
 
 public class WordInfo implements Serializable{
@@ -5,6 +7,13 @@ public class WordInfo implements Serializable{
 	private int endIndex;
 	private String word;
 	private String category;
+
+	public WordInfo(int startIndex, int endIndex, String word, String category){
+		this.startIndex = startIndex;
+		this.endIndex = endIndex;
+		this.word = word;
+		this.category = category;
+	}
 
 	public void setStartIndex(int index){
 		this.startIndex = index;

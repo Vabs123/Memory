@@ -28,12 +28,14 @@ class DemoTextRazor{
 		client.addExtractor("words");
 		client.addExtractor("entities");
 		client.addExtractor("relations");
+		
 		//analyze function for analyzing your text.
-		AnalyzedText response = client.analyze("Rita is taking care of my dog.");
+		AnalyzedText response = client.analyze("My hostel wifi password is vabs.");
+
 		/*for (Entity entity : response.getResponse().getEntities()) {
     		System.out.println("Matched Entity: " + entity.getEntityId());	
 		}*/
-		for(Relation relation:response.getResponse().getRelations()){
+		/*for(Relation relation:response.getResponse().getRelations()){
 			for(Word word1:relation.getPredicateWords()){
 				System.out.println("Predicate = "+word1.getLemma());
 			}
@@ -44,7 +46,7 @@ class DemoTextRazor{
 			}
 		}
 				//System.out.println(relPar.getRelation());*/
-		/*for(Property prop:response.getResponse().getProperties()){
+		for(Property prop:response.getResponse().getProperties()){
 				for(Word word:prop.getPredicateWords()){
 					System.out.println("Predicate ->"+word.getLemma());						
 				}
@@ -52,6 +54,6 @@ class DemoTextRazor{
 					System.out.println("Property ->"+word.getLemma());						
 				}
 				System.out.println("--------------------------------");
-			}*/
+			}
 	}
 }

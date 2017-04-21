@@ -6,6 +6,13 @@ public class WordInfo implements Serializable{
 	private String word;
 	private String category;
 
+	public WordInfo(int startIndex, int endIndex, String word, String category){
+		this.startIndex = startIndex;
+		this.endIndex = endIndex;
+		this.word = word;
+		this.category = category;
+	}
+
 	public void setStartIndex(int index){
 		this.startIndex = index;
 	}
