@@ -17,7 +17,7 @@ import java.util.LinkedHashSet;
 import datasaver.WordDictionary;
 import datasaver.DictionaryManager;
 /************************************************
-* This is demo of using TextRazorApi.
+* This class is using TextRazorApi.
 * The TextRazor API helps you extract 
 * and understand the Who, What, Why and 
 * How from your text with unprecedented 
@@ -39,13 +39,12 @@ public class NLPImplementation{
 		return client.analyze(sentence);
 	}
 
+	//ths method returns words that are in relation (subject and objects).
 	private ArrayList<Word> getRelationWords(AnalyzedText response){
 		ArrayList<Word> words = new ArrayList<>();
 		List<Relation> relations = response.getResponse().getRelations();
 		if(relations != null){
 			for(Relation relation:relations){
-				//for(Word word:relation.getPredicateWords())
-				//	words.add(word);
 				for(RelationParam relParm:relation.getParams())
 					for(Word word:relParm.getParamWords())
 						words.add(word);
@@ -54,6 +53,7 @@ public class NLPImplementation{
 		return words;
 	}
 
+	//method returns all predicate and their property words
 	private ArrayList<Word> getPropWords(AnalyzedText response){
 		ArrayList<Word> words = new ArrayList<>();
 		List<Property> properties = response.getResponse().getProperties();
@@ -68,6 +68,7 @@ public class NLPImplementation{
 		return words;
 	}
 
+	// method returns all words in noun phrases.
 	private ArrayList<Word> getNounPhraseWords(AnalyzedText response){
 		ArrayList<Word> words = new ArrayList<>();
 		List<NounPhrase> nounPhrases = response.getResponse().getNounPhrases();
@@ -80,6 +81,7 @@ public class NLPImplementation{
 		return words;
 	}
 
+	// method return words that matched with a given word
 	private Word getMatchedWords(String word, ArrayList<Word> words){
 		for(Word w:words){
 			if(w.getStem().equals(word))
@@ -88,6 +90,7 @@ public class NLPImplementation{
 		return null;
 	}
 
+	// method removes duplicate from wordlist
 	private ArrayList<Word> removeDuplicates(ArrayList<Word> words){
 		ArrayList<Word> uniqueWords = new ArrayList<>();
 		LinkedHashSet<String> set = new LinkedHashSet<>();
@@ -102,6 +105,7 @@ public class NLPImplementation{
 		return uniqueWords;
 	}
 
+	//method removes the stop words using WordDictionary class
 	private ArrayList<Word> removeStopWords(ArrayList<Word> words){
 		WordDictionary wd = DictionaryManager.getDictionary("StopWord");
 		ArrayList<Word> filterWords = new ArrayList<>();
@@ -112,6 +116,7 @@ public class NLPImplementation{
 		return filterWords;
 	}
 
+	// returns filtered word.
 	public ArrayList<Word> getWords(String sentence){
 		ArrayList<Word> words = new ArrayList<>();
 		AnalyzedText response = null;

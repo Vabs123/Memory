@@ -3,7 +3,14 @@ package wordstructure;
 import java.util.ArrayList;
 import java.io.Serializable;
 
+/******************************************************************
+* This class represent the text form that will be saved by bot.
+* wordList - the collection of WordInfo Objects;
+* sentence - the complete text enter by the user.
+******************************************************************/ 
+
 public class Memory implements Serializable{
+	private static final long serialVersionUID = 2L;
 	private ArrayList<WordInfo> wordInfoList;
 	private String sentence;
 
@@ -41,6 +48,10 @@ public class Memory implements Serializable{
 		return this.sentence;
 	}
 
+	// WordInfo contains word stem, not the original word.
+	// This function will give the orignal word as entered by the user 
+	// by matching the WordInfo object starting and ending index with
+	// original word. 
 	public String getWordAt(int startIndex, int endIndex){
 		String word = "";
 		for(int i = startIndex; i < endIndex; i++)

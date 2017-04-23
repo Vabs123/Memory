@@ -2,11 +2,23 @@ package datasaver;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.io.Serializable;
 import java.util.HashSet;
-import java.io.*;
+
+import java.io.Serializable;
+import java.io.IOException;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+/***********************************************************************************
+* This class is used to make dictionary of words using Trie Data Structure.
+* Trie is used because it searches word in O(length(string)).
+* Stop word Dictionary is made using this.
+* To check if sentence is question or not.
+************************************************************************************/
 
 public class WordDictionary implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private class TrieNode implements Serializable{
         Map<Character, TrieNode> children;
@@ -54,22 +66,24 @@ public class WordDictionary implements Serializable{
         //return true of current's endOfWord is true else return false.
         return current.endOfWord;
     }
-    public static void main(String[] args) throws Exception {
-        WordDictionary wd = new WordDictionary();
-      /*  HashSet<String> set = new HashSet<>();
-        BufferedReader br = new BufferedReader(new FileReader("/tmp/data/question.txt"));
-        String s = "";
-        while((s = br.readLine()) != null)
-            set.add(s);
-        for(String ss:set)
-            wd.insert(ss);*/
 
-        SaveData sd = new SaveData("/tmp/data/questions.txt");
-      //  sd.saveData(wd);
-        //System.out.println(wd.containWord("when"));
-       wd = (WordDictionary) sd.getData();
-      //  wd.insert("remember");
-        //System.out.println(wd.containWord("remember"));
-        //sd.saveData(wd);
+    public static void main(String[] args) throws Exception {
+      /*  HashSet<String> set = new HashSet<>();
+        WordDictionary wd = new WordDictionary();
+        File f = new File(WordDictionary.class.getClass().getResource("/data/stop_words.txt").getFile());
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String s = "";
+        while((s = br.readLine()) != null){
+            set.add(s);
+        }
+
+        for(String ss:set)
+            wd.insert(ss);
+*/
+        SaveData sd = new SaveData("stop_word.txt");
+     //   sd.saveData(wd);
+
+       WordDictionary wd = (WordDictionary) sd.getData();
+        System.out.println(wd.containWord("name"));
     }
 }

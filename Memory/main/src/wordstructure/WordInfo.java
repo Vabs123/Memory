@@ -2,6 +2,13 @@ package wordstructure;
 
 import java.io.Serializable;
 
+/****************************************************************
+* This class represent single word of text
+* startIndex & endIndex - starting and ending index of word
+* category - in which category the word falls.
+* category can be - people, place , time and other.
+****************************************************************/
+
 public class WordInfo implements Serializable{
 	private int startIndex;
 	private int endIndex;

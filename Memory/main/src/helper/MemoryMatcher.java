@@ -1,8 +1,16 @@
 package helper;
 
 import java.util.ArrayList;
+
 import wordstructure.Memory;
 import wordstructure.WordInfo;
+
+/**************************************************************************************
+* This class is used to when question is asked by user. It calculates the score
+* of match of each memory with question and returns the best match memory. 
+* It also returns the not matched memory words. Answer to query is given on the 
+* basis of unmatched words.
+* *************************************************************************************/
 
 public class MemoryMatcher{
 	private ArrayList<Memory> memoryList;
@@ -12,8 +20,10 @@ public class MemoryMatcher{
 	public MemoryMatcher(Memory memory){
 		this.notMatchedWords = new ArrayList<>();
 		this.memoryList = new MemoryController().getMemories();
-		this.matchedMemory = matchMemory(memory);
-		findNotMatchedWords(memory);
+		if(this.memoryList != null && this.memoryList.size() != 0){
+			this.matchedMemory = matchMemory(memory);
+			findNotMatchedWords(memory);
+		}
 	}
 
 

@@ -7,11 +7,17 @@ import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 
+/*******************************************************************
+* This class is used for serializing and deserializing objects.
+*******************************************************************/
+
 public class SaveData {
 	private File file;
 
+	// name of file where to save or retrieve objects.
 	public SaveData(String file){
-		this.file = new File(file);
+		 this.file = new File(getClass().getResource("/data/"+file).getFile());
+		//this.file = new File(file);
 	}
 
 	public void saveData(Object o) {
@@ -29,7 +35,7 @@ public class SaveData {
 		ObjectInputStream oin = null;
 		Object o = null;
 		try{
-			if(this.file.exists()){				
+			if(this.file.exists() && this.file.length() != 0){				
 				oin = new ObjectInputStream(new FileInputStream(file));
 				o = oin.readObject();
 				oin.close();
