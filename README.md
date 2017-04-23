@@ -28,5 +28,7 @@ Only thing left was to categorize each word in one of the four categories as men
 * time - when, at what time.
 * other - what and any other types of questions.
 
+Cheers
+
 
 
