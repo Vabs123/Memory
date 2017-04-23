@@ -33,6 +33,7 @@ public class NLPImplementation{
 		TextRazor client = new TextRazor(API_KEY);
 		//addExtractor will be used to get specific parts of speech text. 
 		client.addExtractor("words");
+		client.addExtractor("entities");
 		client.addExtractor("phrases");
 		client.addExtractor("relations");
 		//analyze function for analyzing your text.
@@ -80,6 +81,22 @@ public class NLPImplementation{
 		}
 		return words;
 	}
+
+	private ArrayList<Word> getAllWords(AnalyzedText response){
+		ArrayList<Word> words = new ArrayList<>();
+		List<Sentence> sentences = response.getResponse().getSentences();
+		if(sentences != null){
+			for(Sentence sentence:sentences){
+				for(Word word:sentence.getWords()){
+					if(!word.getStem().equals("."))
+						words.add(word);
+				}
+			}
+		}
+		return words;
+	}
+
+	
 
 	// method return words that matched with a given word
 	private Word getMatchedWords(String word, ArrayList<Word> words){
@@ -131,13 +148,16 @@ public class NLPImplementation{
 			words.addAll(getPropWords(response));
 			words.addAll(getRelationWords(response));
 		}
+		if(words.size() == 0){
+			words.addAll(getAllWords(response));
+		}
 		words = removeDuplicates(words);
 		words = removeStopWords(words);
 		return words;
 	}
 
 	public static void main(String[] args) {
-		String s = "I have a meeting in my office at 2 pm.";
+		String s = "My hostel wifi password is jaggerbery.";
 		for(Word word:new NLPImplementation().getWords(s))
 			System.out.println(word.getStem());
 	}

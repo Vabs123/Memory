@@ -1,6 +1,8 @@
 import com.textrazor.TextRazor;
 import com.textrazor.annotations.Entity;
 import com.textrazor.annotations.AnalyzedText;
+import com.textrazor.annotations.Word;
+import com.textrazor.annotations.Sentence;
 
 /************************************************
 * This is demo of using TextRazorApi.
@@ -22,8 +24,9 @@ class DemoTextRazor{
 		client.addExtractor("entities");
 		//analyze function for analyzing your text.
 		AnalyzedText response = client.analyze("My hostel wifi password is vabro.");
-		for (Entity entity : response.getResponse().getEntities()) {
-    		System.out.println("Matched Entity: " + entity.getEntityId());	
+		for (Sentence sentence : response.getResponse().getSentences()) {
+    		for(Word word:sentence.getWords())
+    		System.out.println(word.getStem());	
 		}
 	}
 }
